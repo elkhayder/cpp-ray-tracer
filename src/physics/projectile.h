@@ -3,8 +3,6 @@
 
 #include "math/tuple.h"
 
-class Environment;
-
 class Projectile
 {
 public:
@@ -19,8 +17,6 @@ public:
     {
         return _velocity;
     }
-
-    friend class Environment;
 
 private:
     Tuple _position; // Point

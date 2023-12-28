@@ -3,6 +3,6 @@
 Projectile Environment::Tick(const Projectile &projectile) const
 {
     return Projectile(
-        projectile._position + projectile._velocity,
-        projectile._velocity + _gravity + _wind);
+        projectile.Position() + projectile.Velocity(),
+        projectile.Position() + _gravity + _wind);
 }
