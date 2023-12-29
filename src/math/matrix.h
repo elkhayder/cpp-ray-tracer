@@ -7,6 +7,7 @@ class Matrix
 {
 public:
     Matrix(int size);
+    Matrix(int size, float *data);
 
     int Index(int row, int col) const;
     float At(int row, int col) const;

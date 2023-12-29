@@ -10,6 +10,20 @@ Matrix::Matrix(int size)
     _size = size;
 }
 
+Matrix::Matrix(int size, float *data)
+{
+    if (size > 4 || size < 0)
+        throw "Invalid matrix size";
+
+    _size = size;
+
+    // Should I use memcpy ?
+    for (int i = 0; i < _size * _size; i++)
+    {
+        _buffer[i] = data[i];
+    }
+}
+
 int Matrix::Index(int row, int col) const
 {
     if (row >= _size || row < 0 || col >= _size || col < 0)
