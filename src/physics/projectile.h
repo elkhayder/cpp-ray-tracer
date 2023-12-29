@@ -1,7 +1,7 @@
 #ifndef __PROJECTILE_H
 #define __PROJECTILE_H
 
-#include "math/tuple.h"
+#include "../math/tuple.h"
 
 class Projectile
 {

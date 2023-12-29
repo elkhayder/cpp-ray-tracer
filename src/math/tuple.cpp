@@ -1,6 +1,7 @@
 #include "tuple.h"
 
 #include <cmath>
+#include "helpers.h"
 
 float Tuple::Magnitude() const
 {
@@ -80,4 +81,9 @@ Tuple Tuple::operator/(float scalar) const
 Tuple operator*(float scalar, const Tuple &tuple)
 {
     return tuple * scalar;
+}
+
+bool operator==(const Tuple &lhs, const Tuple &rhs)
+{
+    return ALMOST_EQ(lhs._x, rhs._x) && ALMOST_EQ(lhs._y, rhs._y) && ALMOST_EQ(lhs._z, rhs._z) && ALMOST_EQ(lhs._w, rhs._w);
 }

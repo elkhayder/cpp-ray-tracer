@@ -1,6 +1,7 @@
-#include <ostream>
 #ifndef __TUPLE_H
 #define __TUPLE_H
+
+#include <ostream>
 
 class Tuple
 {
@@ -35,6 +36,17 @@ public:
     {
         return _z;
     }
+
+    float W() const
+    {
+        return _w;
+    }
+
+    /**
+     * Comparison
+     */
+
+    friend bool operator==(const Tuple &lhs, const Tuple &rhs);
 
     /**
      * Operations

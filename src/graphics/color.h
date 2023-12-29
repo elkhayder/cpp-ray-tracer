@@ -17,6 +17,12 @@ public:
 
     Color operator*(const Color &other) const;
 
+    /**
+     * Comparison
+     */
+
+    bool operator==(const Color &other) const;
+
     float R() const
     {
         return _r;

@@ -1,8 +1,8 @@
 #ifndef __ENVIRONMENT_H
 #define __ENVIRONMENT_H
 
-#include "math/tuple.h"
 #include "projectile.h"
+#include "../math/tuple.h"
 
 class Environment
 {
