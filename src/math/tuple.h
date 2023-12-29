@@ -44,15 +44,7 @@ public:
     Tuple operator*(const Tuple &other) const;
 
     // Addition
-    friend Tuple operator+(const Tuple &a, const Tuple &b)
-    {
-        return Tuple(
-            a._x + b._x,
-            a._y + b._y,
-            a._z + b._z,
-            a._w + b._w);
-        ;
-    };
+    friend Tuple operator+(const Tuple &a, const Tuple &b);
 
     // Substraction
     Tuple operator-(const Tuple &other);
@@ -67,10 +59,7 @@ public:
     Tuple operator*(float scalar) const;
 
     // Scalar multiplication (scalar * tuple)
-    friend Tuple operator*(float scalar, const Tuple &tuple)
-    {
-        return tuple * scalar;
-    };
+    friend Tuple operator*(float scalar, const Tuple &tuple);
 
     /**
      * Output stream

@@ -57,6 +57,16 @@ Tuple Tuple::operator*(float scalar) const
         scalar * _w);
 }
 
+Tuple operator+(const Tuple &a, const Tuple &b)
+{
+    return Tuple(
+        a._x + b._x,
+        a._y + b._y,
+        a._z + b._z,
+        a._w + b._w);
+    ;
+}
+
 // Scalar division
 Tuple Tuple::operator/(float scalar) const
 {
@@ -65,4 +75,9 @@ Tuple Tuple::operator/(float scalar) const
         _y / scalar,
         _z / scalar,
         _w / scalar);
+}
+
+Tuple operator*(float scalar, const Tuple &tuple)
+{
+    return tuple * scalar;
 }
