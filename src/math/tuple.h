@@ -3,9 +3,13 @@
 
 #include <ostream>
 
+class Matrix;
+
 class Tuple
 {
 public:
+    Tuple(){};
+    Tuple(const Matrix &matrix);
     Tuple(float x, float y, float z, float w) : _x(x), _y(y), _z(z), _w(w){};
 
     static Tuple Vector(float x, float y, float z)
@@ -41,6 +45,26 @@ public:
     {
         return _w;
     }
+
+    // float SetX(float x)
+    // {
+    //     _x = x;
+    // }
+
+    // float SetY(float y)
+    // {
+    //     _y = y;
+    // }
+
+    // float SetZ(float z)
+    // {
+    //     _z = z;
+    // }
+
+    // float SetW(float w)
+    // {
+    //     _w = w;
+    // }
 
     /**
      * Comparison

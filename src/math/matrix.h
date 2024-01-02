@@ -6,8 +6,11 @@
 class Matrix
 {
 public:
-    Matrix(int size);
-    Matrix(int size, float *data);
+    Matrix(const Tuple &tuple);
+    Matrix(int size) : Matrix(size, size) {}
+    Matrix(int size, float *data) : Matrix(size, size, data){};
+    Matrix(int rows, int cols);
+    Matrix(int rows, int cols, float *data);
 
     int Index(int row, int col) const;
     float At(int row, int col) const;
@@ -17,9 +20,19 @@ public:
     friend Matrix operator*(const Matrix &lhs, const Matrix &rhs);
     Tuple operator*(const Tuple &tuple);
 
+    int Rows() const
+    {
+        return _rows;
+    }
+
+    int Cols() const
+    {
+        return _cols;
+    }
+
 private:
-    int _size;
-    float _buffer[4 * 4] = {}; // MAX 4*4 matrix
+    int _rows, _cols;
+    float *_buffer;
 };
 
 #endif // __MATRIX_H

@@ -2,34 +2,42 @@
 
 #include "helpers.h"
 
-Matrix::Matrix(int size)
+Matrix::Matrix(int rows, int cols)
 {
-    if (size > 4 || size < 0)
-        throw "Invalid matrix size";
+    if (rows <= 0 || cols <= 0)
+        throw "Negative matrix sizes";
 
-    _size = size;
+    _rows = rows;
+    _cols = cols;
+
+    _buffer = new float[rows * cols];
 }
 
-Matrix::Matrix(int size, float *data)
+Matrix::Matrix(int rows, int cols, float *data) : Matrix(rows, cols)
 {
-    if (size > 4 || size < 0)
-        throw "Invalid matrix size";
-
-    _size = size;
-
     // Should I use memcpy ?
-    for (int i = 0; i < _size * _size; i++)
+    for (int i = 0; i < rows * cols; i++)
     {
         _buffer[i] = data[i];
     }
+
+    delete[] data; // TODO : Should it be removed?
+}
+
+Matrix::Matrix(const Tuple &tuple) : Matrix(4, 1)
+{
+    _buffer[0] = tuple.X();
+    _buffer[1] = tuple.Y();
+    _buffer[2] = tuple.Z();
+    _buffer[3] = tuple.W();
 }
 
 int Matrix::Index(int row, int col) const
 {
-    if (row >= _size || row < 0 || col >= _size || col < 0)
+    if (row >= _rows || row < 0 || col >= _cols || col < 0)
         throw "Matrix index out of bound";
 
-    return row * _size + col;
+    return row * _cols + col;
 }
 
 float Matrix::At(int row, int col) const
@@ -44,10 +52,10 @@ void Matrix::Set(int row, int col, float val)
 
 bool operator==(const Matrix &lhs, const Matrix &rhs)
 {
-    if (lhs._size != rhs._size)
+    if (lhs._rows != rhs._rows || lhs._cols != rhs._cols)
         return false;
 
-    for (int i = 0; i < lhs._size * lhs._size; i++)
+    for (int i = 0; i < lhs._rows * lhs._cols; i++)
     {
         if (!ALMOST_EQ(lhs._buffer[i], rhs._buffer[i]))
             return false;
@@ -58,18 +66,18 @@ bool operator==(const Matrix &lhs, const Matrix &rhs)
 
 Matrix operator*(const Matrix &lhs, const Matrix &rhs)
 {
-    if (rhs._size != lhs._size)
-        throw "Multiplying two matrices with different sizes";
+    if (lhs._cols != rhs._rows)
+        throw "Multiplying two matrices with incompatible size";
 
-    Matrix result(rhs._size);
+    Matrix result(lhs._rows, rhs._cols);
 
-    for (int row = 0; row < lhs._size; row++)
+    for (int row = 0; row < result._rows; row++)
     {
-        for (int col = 0; col < lhs._size; col++)
+        for (int col = 0; col < result._cols; col++)
         {
             float sum = 0;
 
-            for (int i = 0; i < lhs._size; i++)
+            for (int i = 0; i < lhs._cols; i++)
             {
                 sum += lhs.At(row, i) * rhs.At(i, col);
             }
@@ -83,4 +91,5 @@ Matrix operator*(const Matrix &lhs, const Matrix &rhs)
 
 Tuple Matrix::operator*(const Tuple &tuple)
 {
+    return (Tuple)((*this) * ((Matrix)tuple));
 }

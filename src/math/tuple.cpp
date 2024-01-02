@@ -1,7 +1,19 @@
 #include "tuple.h"
 
 #include <cmath>
+#include "matrix.h"
 #include "helpers.h"
+
+Tuple::Tuple(const Matrix &matrix)
+{
+    if (matrix.Rows() != 4 || matrix.Cols() != 1)
+        throw "Matrix to tuple incompatible sizes";
+
+    _x = matrix.At(0, 0);
+    _y = matrix.At(1, 0);
+    _z = matrix.At(2, 0);
+    _w = matrix.At(3, 0);
+}
 
 float Tuple::Magnitude() const
 {
