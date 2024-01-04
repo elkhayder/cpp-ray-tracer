@@ -147,3 +147,15 @@ TEST(MatrixTest, Submatrix)
         // clang-format on
     );
 }
+
+TEST(MatrixTest, Determinant)
+{
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(2, new float[4]{
+           1, 5,
+           -3, 2
+        }).Determinant(),
+        // clang-format on
+        17);
+}

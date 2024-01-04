@@ -27,6 +27,7 @@ public:
     Matrix Transpose() const;
     // Row and Col are 0 indexed
     Matrix Submatrix(int row, int col) const;
+    float Determinant() const;
 
     bool operator==(const Matrix &rhs) const;
     Matrix operator*(const Matrix &rhs) const;

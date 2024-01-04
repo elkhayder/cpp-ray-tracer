@@ -148,3 +148,12 @@ Matrix Matrix::Submatrix(int row, int col) const
 
     return result;
 }
+
+float Matrix::Determinant() const
+{
+    assert(_rows == _cols); // Determinant is computable only for square matrices
+
+    assert(_cols == 2); // _rows == 2 implicit
+
+    return _buffer[0] * _buffer[3] - _buffer[1] * _buffer[2]; // ad - bc
+}
