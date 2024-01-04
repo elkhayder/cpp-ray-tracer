@@ -18,3 +18,14 @@ TEST(Transformations, Translation)
         Matrix::Translation(5, -3, 2) * Tuple::Vector(-3, 4, 5),
         Tuple::Vector(-3, 4, 5));
 }
+
+TEST(Transformations, Scaling)
+{
+    EXPECT_EQ( // Point
+        Matrix::Scaling(2, 3, 4) * Tuple::Point(-4, 6, 8),
+        Tuple::Point(-8, 18, 32));
+
+    EXPECT_EQ( // Vector
+        Matrix::Scaling(2, 3, 4) * Tuple::Vector(-4, 6, 8),
+        Tuple::Vector(-8, 18, 32));
+}

@@ -26,6 +26,7 @@ public:
     static Matrix Identity() { return Identity(4); };
 
     static Matrix Translation(float x, float y, float z);
+    static Matrix Scaling(float x, float y, float z);
 
     //
 

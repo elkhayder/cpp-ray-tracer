@@ -220,9 +220,31 @@ Matrix Matrix::Translation(float x, float y, float z)
 {
     Matrix result = Matrix::Identity();
 
+    // 1 | 0 | 0 | x
+    // 0 | 1 | 0 | y
+    // 0 | 0 | 1 | z
+    // 0 | 0 | 0 | 1
+
     result.Set(0, 3, x);
     result.Set(1, 3, y);
     result.Set(2, 3, z);
+
+    return result;
+}
+
+Matrix Matrix::Scaling(float x, float y, float z)
+{
+    Matrix result = Matrix::Zeros();
+
+    // x | 0 | 0 | 0
+    // 0 | y | 0 | 0
+    // 0 | 0 | z | 0
+    // 0 | 0 | 0 | 1
+
+    result.Set(0, 0, x);
+    result.Set(1, 1, y);
+    result.Set(2, 2, z);
+    result.Set(3, 3, 1);
 
     return result;
 }
