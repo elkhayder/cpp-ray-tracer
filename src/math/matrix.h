@@ -25,8 +25,9 @@ public:
     void Set(int row, int col, float val);
 
     Matrix Transpose() const;
-    // Row and Col are 0 indexed
     Matrix Submatrix(int row, int col) const;
+    float Minor(int row, int col) const; // Determinant of submatrix
+    float Cofactor(int row, int col) const;
     float Determinant() const;
 
     bool operator==(const Matrix &rhs) const;

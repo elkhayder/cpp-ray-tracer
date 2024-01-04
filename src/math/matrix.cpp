@@ -149,11 +149,35 @@ Matrix Matrix::Submatrix(int row, int col) const
     return result;
 }
 
+float Matrix::Minor(int row, int col) const
+{
+    return Submatrix(row, col).Determinant();
+}
+
+float Matrix::Cofactor(int row, int col) const
+{
+    if (row % 2 == col % 2) // XOR
+    {
+        return Minor(row, col);
+    }
+
+    return -Minor(row, col);
+}
+
 float Matrix::Determinant() const
 {
     assert(_rows == _cols); // Determinant is computable only for square matrices
 
-    assert(_cols == 2); // _rows == 2 implicit
+    if (_rows == 2)
+    {
+        return _buffer[0] * _buffer[3] - _buffer[1] * _buffer[2]; // ad - bc
+    }
 
-    return _buffer[0] * _buffer[3] - _buffer[1] * _buffer[2]; // ad - bc
+    float det = 0;
+    for (int col = 0; col < _cols; col++)
+    {
+        det += At(0, col) * Cofactor(0, col);
+    }
+
+    return det;
 }

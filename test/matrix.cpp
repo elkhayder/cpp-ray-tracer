@@ -148,8 +148,36 @@ TEST(MatrixTest, Submatrix)
     );
 }
 
+TEST(MatrixTest, Minor)
+{
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(3, new float[9] {
+            3, 5, 0, 
+            2, -1, -7, 
+            6, -1, 5
+        }).Minor(1, 0),
+        // clang-format on
+        25);
+}
+
+TEST(MatrixTest, Cofactor)
+{
+    // clang-format off
+    Matrix m(3, new float[9] {
+        3,  5,  0, 
+        2, -1, -7, 
+        6, -1,  5
+    });
+    // clang-format on
+
+    EXPECT_EQ(m.Cofactor(0, 0), -12);
+    EXPECT_EQ(m.Cofactor(1, 0), -25);
+}
+
 TEST(MatrixTest, Determinant)
 {
+    // 2x2
     EXPECT_EQ(
         // clang-format off
         Matrix(2, new float[4]{
@@ -158,4 +186,25 @@ TEST(MatrixTest, Determinant)
         }).Determinant(),
         // clang-format on
         17);
+
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(3, new float[9]{
+            1, 2, 6, 
+            -5, 8, -4, 
+            2, 6, 4
+        }).Determinant(),
+        // clang-format on
+        -196);
+
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(4, new float[16]{
+            -2, -8, 3, 5, 
+            -3, 1, 7, 3, 
+            1, 2, -9, 6, 
+            -6, 7, 7, -9
+        }).Determinant(),
+        // clang-format on
+        -4071);
 }
