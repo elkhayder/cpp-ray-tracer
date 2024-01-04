@@ -33,22 +33,6 @@ Matrix::Matrix(const Tuple &tuple) : Matrix(4, 1)
     _buffer[3] = tuple.W();
 }
 
-Matrix Matrix::Identity()
-{
-    return Identity(4);
-}
-
-Matrix Matrix::Identity(int size)
-{
-    Matrix m(size);
-
-    for (int row = 0; row < size; row++)
-        for (int col = 0; col < size; col++)
-            m.Set(row, col, row == col ? 1 : 0);
-
-    return m;
-}
-
 int Matrix::Index(int row, int col) const
 {
     assert(row < _rows && row >= 0 && col < _cols && col >= 0);
@@ -207,4 +191,33 @@ Matrix Matrix::Inverse() const
             cofactors.Set(i, j, Cofactor(i, j));
 
     return cofactors.Transpose() / det;
+}
+
+//
+
+Matrix Matrix::Identity(int size)
+{
+    Matrix m(size);
+
+    for (int row = 0; row < size; row++)
+        for (int col = 0; col < size; col++)
+            m.Set(row, col, row == col ? 1 : 0);
+
+    return m;
+}
+
+Matrix Matrix::Identity()
+{
+    return Identity(4);
+}
+
+Matrix Matrix::Translation(float x, float y, float z)
+{
+    Matrix result = Matrix::Identity();
+
+    result.Set(0, 3, x);
+    result.Set(1, 3, y);
+    result.Set(2, 3, z);
+
+    return result;
 }

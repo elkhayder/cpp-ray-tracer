@@ -12,13 +12,15 @@ public:
     Matrix(int rows, int cols);
     Matrix(int rows, int cols, float *data);
 
-    static Matrix Identity();
-    static Matrix Identity(int size);
-
     ~Matrix()
     {
         delete[] _buffer;
     }
+
+    //
+    static Matrix Identity();
+    static Matrix Identity(int size);
+    static Matrix Translation(float x, float y, float z);
 
     int Index(int row, int col) const;
     float At(int row, int col) const;
