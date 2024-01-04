@@ -51,7 +51,7 @@ Matrix Matrix::Identity(int size)
 
 int Matrix::Index(int row, int col) const
 {
-    assert(row >= _rows && row < 0 && col >= _cols && col < 0);
+    assert(row < _rows && row >= 0 && col < _cols && col >= 0);
 
     return row * _cols + col;
 }
