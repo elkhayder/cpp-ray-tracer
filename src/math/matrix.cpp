@@ -195,20 +195,25 @@ Matrix Matrix::Inverse() const
 
 //
 
-Matrix Matrix::Identity(int size)
+Matrix Matrix::Zeros(int rows, int cols)
 {
-    Matrix m(size);
+    Matrix result(rows, cols);
 
-    for (int row = 0; row < size; row++)
-        for (int col = 0; col < size; col++)
-            m.Set(row, col, row == col ? 1 : 0);
+    for (int row = 0; row < rows; row++)
+        for (int col = 0; col < cols; col++)
+            result.Set(row, col, 0);
 
-    return m;
+    return result;
 }
 
-Matrix Matrix::Identity()
+Matrix Matrix::Identity(int size)
 {
-    return Identity(4);
+    Matrix result = Matrix::Zeros(size);
+
+    for (int i = 0; i < size; i++)
+        result.Set(i, i, 1);
+
+    return result;
 }
 
 Matrix Matrix::Translation(float x, float y, float z)

@@ -18,9 +18,16 @@ public:
     }
 
     //
-    static Matrix Identity();
+    static Matrix Zeros(int rows, int cols);
+    static Matrix Zeros(int size) { return Zeros(size, size); }
+    static Matrix Zeros() { return Zeros(4); };
+
     static Matrix Identity(int size);
+    static Matrix Identity() { return Identity(4); };
+
     static Matrix Translation(float x, float y, float z);
+
+    //
 
     int Index(int row, int col) const;
     float At(int row, int col) const;
