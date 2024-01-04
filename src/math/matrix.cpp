@@ -6,7 +6,7 @@
 
 Matrix::Matrix(int rows, int cols)
 {
-    assert(_cols > 0 && _rows > 0);
+    assert(cols > 0 && rows > 0);
 
     _rows = rows;
     _cols = cols;
