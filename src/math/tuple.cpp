@@ -1,13 +1,14 @@
 #include "tuple.h"
 
 #include <cmath>
+#include <assert.h>
+
 #include "matrix.h"
 #include "helpers.h"
 
 Tuple::Tuple(const Matrix &matrix)
 {
-    if (matrix.Rows() != 4 || matrix.Cols() != 1)
-        throw "Matrix to tuple incompatible sizes";
+    assert(matrix.Rows() != 4 && matrix.Cols() != 1);
 
     _x = matrix.At(0, 0);
     _y = matrix.At(1, 0);

@@ -1,11 +1,12 @@
 #include "matrix.h"
 
+#include <assert.h>
+
 #include "helpers.h"
 
 Matrix::Matrix(int rows, int cols)
 {
-    if (rows <= 0 || cols <= 0)
-        throw "Negative matrix sizes";
+    assert(_cols > 0 && _rows > 0);
 
     _rows = rows;
     _cols = cols;
@@ -50,8 +51,7 @@ Matrix Matrix::Identity(int size)
 
 int Matrix::Index(int row, int col) const
 {
-    if (row >= _rows || row < 0 || col >= _cols || col < 0)
-        throw "Matrix index out of bound";
+    assert(row >= _rows && row < 0 && col >= _cols && col < 0);
 
     return row * _cols + col;
 }
@@ -82,8 +82,7 @@ bool Matrix::operator==(const Matrix &rhs) const
 
 Matrix Matrix::operator*(const Matrix &rhs) const
 {
-    if (_cols != rhs._rows)
-        throw "Multiplying two matrices with incompatible size";
+    assert(_cols == rhs._rows);
 
     Matrix result(_rows, rhs._cols);
 
