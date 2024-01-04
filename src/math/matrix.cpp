@@ -32,6 +32,22 @@ Matrix::Matrix(const Tuple &tuple) : Matrix(4, 1)
     _buffer[3] = tuple.W();
 }
 
+Matrix Matrix::Identity()
+{
+    return Identity(4);
+}
+
+Matrix Matrix::Identity(int size)
+{
+    Matrix m(size);
+
+    for (int row = 0; row < size; row++)
+        for (int col = 0; col < size; col++)
+            m.Set(row, col, row == col ? 1 : 0);
+
+    return m;
+}
+
 int Matrix::Index(int row, int col) const
 {
     if (row >= _rows || row < 0 || col >= _cols || col < 0)
@@ -50,26 +66,26 @@ void Matrix::Set(int row, int col, float val)
     _buffer[Index(row, col)] = val;
 }
 
-bool operator==(const Matrix &lhs, const Matrix &rhs)
+bool Matrix::operator==(const Matrix &rhs) const
 {
-    if (lhs._rows != rhs._rows || lhs._cols != rhs._cols)
+    if (_rows != rhs._rows || _cols != rhs._cols)
         return false;
 
-    for (int i = 0; i < lhs._rows * lhs._cols; i++)
+    for (int i = 0; i < _rows * _cols; i++)
     {
-        if (!ALMOST_EQ(lhs._buffer[i], rhs._buffer[i]))
+        if (!ALMOST_EQ(_buffer[i], rhs._buffer[i]))
             return false;
     }
 
     return true;
 }
 
-Matrix operator*(const Matrix &lhs, const Matrix &rhs)
+Matrix Matrix::operator*(const Matrix &rhs) const
 {
-    if (lhs._cols != rhs._rows)
+    if (_cols != rhs._rows)
         throw "Multiplying two matrices with incompatible size";
 
-    Matrix result(lhs._rows, rhs._cols);
+    Matrix result(_rows, rhs._cols);
 
     for (int row = 0; row < result._rows; row++)
     {
@@ -77,9 +93,9 @@ Matrix operator*(const Matrix &lhs, const Matrix &rhs)
         {
             float sum = 0;
 
-            for (int i = 0; i < lhs._cols; i++)
+            for (int i = 0; i < _cols; i++)
             {
-                sum += lhs.At(row, i) * rhs.At(i, col);
+                sum += At(row, i) * rhs.At(i, col);
             }
 
             result.Set(row, col, sum);
@@ -89,7 +105,22 @@ Matrix operator*(const Matrix &lhs, const Matrix &rhs)
     return result;
 }
 
-Tuple Matrix::operator*(const Tuple &tuple)
+Tuple Matrix::operator*(const Tuple &tuple) const
 {
     return (Tuple)((*this) * ((Matrix)tuple));
+}
+
+Matrix Matrix::Transpose()
+{
+    Matrix result(_cols, _rows); // Flipped rows and cols
+
+    for (int i = 0; i < _rows; i++)
+    {
+        for (int j = 0; j < _cols; j++)
+        {
+            result.Set(j, i, At(i, j));
+        }
+    }
+
+    return result;
 }

@@ -12,13 +12,23 @@ public:
     Matrix(int rows, int cols);
     Matrix(int rows, int cols, float *data);
 
+    static Matrix Identity();
+    static Matrix Identity(int size);
+
+    ~Matrix()
+    {
+        delete[] _buffer;
+    }
+
     int Index(int row, int col) const;
     float At(int row, int col) const;
     void Set(int row, int col, float val);
 
-    friend bool operator==(const Matrix &lhs, const Matrix &rhs);
-    friend Matrix operator*(const Matrix &lhs, const Matrix &rhs);
-    Tuple operator*(const Tuple &tuple);
+    Matrix Transpose();
+
+    bool operator==(const Matrix &rhs) const;
+    Matrix operator*(const Matrix &rhs) const;
+    Tuple operator*(const Tuple &tuple) const;
 
     int Rows() const
     {
