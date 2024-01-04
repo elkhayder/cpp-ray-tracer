@@ -27,6 +27,10 @@ public:
 
     static Matrix Translation(float x, float y, float z);
     static Matrix Scaling(float x, float y, float z);
+    static Matrix RotationX(float angle);
+    static Matrix RotationY(float angle);
+    static Matrix RotationZ(float angle);
+    static Matrix Shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y);
 
     //
 

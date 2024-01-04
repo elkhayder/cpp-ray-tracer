@@ -1,6 +1,7 @@
 #include "matrix.h"
 
 #include <assert.h>
+#include <cmath>
 
 #include "helpers.h"
 
@@ -245,6 +246,85 @@ Matrix Matrix::Scaling(float x, float y, float z)
     result.Set(1, 1, y);
     result.Set(2, 2, z);
     result.Set(3, 3, 1);
+
+    return result;
+}
+
+Matrix Matrix::RotationX(float angle)
+{
+    Matrix result = Matrix::Identity();
+
+    // 1 |    0   |    0    | 0
+    // 0 | cos(r) | −sin(r) | 0
+    // 0 | sin(r) |  cos(r) | 0
+    // 0 |    0   |    0    | 1
+
+    float sinR = std::sin(angle);
+    float cosR = std::cos(angle);
+
+    result.Set(1, 1, cosR);
+    result.Set(1, 2, -sinR);
+    result.Set(2, 1, sinR);
+    result.Set(2, 2, cosR);
+
+    return result;
+}
+
+Matrix Matrix::RotationY(float angle)
+{
+    Matrix result = Matrix::Identity();
+
+    // cos(r)  | 0 |  sin(r)  | 0
+    //    0    | 1 |     0    | 0
+    // -sin(r) | 0 |  cos(r)  | 0
+    //    0    | 0 |     0    | 1
+
+    float sinR = std::sin(angle);
+    float cosR = std::cos(angle);
+
+    result.Set(0, 0, cosR);
+    result.Set(0, 2, sinR);
+    result.Set(2, 0, -sinR);
+    result.Set(2, 2, cosR);
+
+    return result;
+}
+
+Matrix Matrix::RotationZ(float angle)
+{
+    Matrix result = Matrix::Identity();
+
+    // cos(r) | −sin(r) | 0 | 0
+    // sin(r) |  cos(r) | 0 | 0
+    //    0   |    0    | 1 | 0
+    //    0   |    0    | 0 | 1
+
+    float sinR = std::sin(angle);
+    float cosR = std::cos(angle);
+
+    result.Set(0, 0, cosR);
+    result.Set(0, 1, -sinR);
+    result.Set(1, 0, sinR);
+    result.Set(1, 1, cosR);
+
+    return result;
+}
+
+Matrix Matrix::Shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y)
+{
+    Matrix result = Matrix::Identity();
+
+    //  1  | x_y | x_z | 0
+    // y_x |  1  | y_z | 0
+    // z_x | z_y |  1  | 0
+    //  0  |  0  |  0  | 1
+
+    result.Set(0, 1, x_y);
+    result.Set(0, 2, x_z);
+    result.Set(1, 0, y_x);
+    result.Set(1, 2, y_z);
+    result.Set(2, 0, z_x);
+    result.Set(2, 1, z_y);
 
     return result;
 }
