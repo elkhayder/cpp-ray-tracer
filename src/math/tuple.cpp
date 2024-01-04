@@ -8,7 +8,7 @@
 
 Tuple::Tuple(const Matrix &matrix)
 {
-    assert(matrix.Rows() != 4 && matrix.Cols() != 1);
+    assert(matrix.Rows() == 4 && matrix.Cols() == 1);
 
     _x = matrix.At(0, 0);
     _y = matrix.At(1, 0);
