@@ -26,12 +26,14 @@ public:
 
     Matrix Transpose() const;
     Matrix Submatrix(int row, int col) const;
+    Matrix Inverse() const;
     float Minor(int row, int col) const; // Determinant of submatrix
     float Cofactor(int row, int col) const;
     float Determinant() const;
 
     bool operator==(const Matrix &rhs) const;
     Matrix operator*(const Matrix &rhs) const;
+    Matrix operator/(const float rhs) const;
     Tuple operator*(const Tuple &tuple) const;
 
     int Rows() const

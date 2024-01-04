@@ -104,6 +104,18 @@ Matrix Matrix::operator*(const Matrix &rhs) const
     return result;
 }
 
+Matrix Matrix::operator/(const float coef) const
+{
+
+    Matrix result(_rows, _cols);
+
+    for (int row = 0; row < result._rows; row++)
+        for (int col = 0; col < result._cols; col++)
+            result.Set(row, col, At(row, col) / coef);
+
+    return result;
+}
+
 Tuple Matrix::operator*(const Tuple &tuple) const
 {
     return static_cast<Tuple>((*this) * static_cast<Matrix>(tuple));
@@ -180,4 +192,19 @@ float Matrix::Determinant() const
     }
 
     return det;
+}
+
+Matrix Matrix::Inverse() const
+{
+    float det = Determinant(); // This takes care of verifying it is a square matrix
+
+    assert(det != 0.0);
+
+    Matrix cofactors(_rows);
+
+    for (int i = 0; i < _rows; i++)
+        for (int j = 0; j < _cols; j++)
+            cofactors.Set(i, j, Cofactor(i, j));
+
+    return cofactors.Transpose() / det;
 }
