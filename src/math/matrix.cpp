@@ -106,10 +106,10 @@ Matrix Matrix::operator*(const Matrix &rhs) const
 
 Tuple Matrix::operator*(const Tuple &tuple) const
 {
-    return (Tuple)((*this) * ((Matrix)tuple));
+    return static_cast<Tuple>((*this) * static_cast<Matrix>(tuple));
 }
 
-Matrix Matrix::Transpose()
+Matrix Matrix::Transpose() const
 {
     Matrix result(_cols, _rows); // Flipped rows and cols
 
@@ -118,6 +118,31 @@ Matrix Matrix::Transpose()
         for (int j = 0; j < _cols; j++)
         {
             result.Set(j, i, At(i, j));
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::Submatrix(int row, int col) const
+{
+    assert(_rows >= 2 && _cols >= 2); // Have at least a 2x2 matrix
+
+    Matrix result(_rows - 1, _cols - 1);
+
+    for (int i = 0; i < _rows; i++)
+    {
+        if (i == row)
+            continue; // Skip row
+        for (int j = 0; j < _cols; j++)
+        {
+            if (j == col)
+                continue; // Skip col
+
+            int x = i > row ? i - 1 : i;
+            int y = j > col ? j - 1 : j;
+
+            result.Set(x, y, At(i, j));
         }
     }
 

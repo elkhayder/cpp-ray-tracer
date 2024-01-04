@@ -114,3 +114,36 @@ TEST(MatrixTest, Transpose)
         // clang-format on
     );
 }
+
+TEST(MatrixTest, Submatrix)
+{
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(3, new float[9]{
+             1, 5,  0, 
+            -3, 2,  7,
+             0, 6, -3
+        }).Submatrix(0, 2),
+        Matrix(2, new float[4]{
+            -3, 2,
+             0, 6
+        })
+        // clang-format on
+    );
+
+    EXPECT_EQ(
+        // clang-format off
+        Matrix(4, new float[16]{
+            -6, 1, 1, 6, 
+            -8, 5, 8, 6, 
+            -1, 0, 8, 2, 
+            -7, 1, -1, 1
+        }).Submatrix(2, 1),
+        Matrix(3, new float[9]{
+            -6, 1, 6, 
+            -8, 8, 6, 
+            -7, -1, 1
+        })
+        // clang-format on
+    );
+}

@@ -24,7 +24,9 @@ public:
     float At(int row, int col) const;
     void Set(int row, int col, float val);
 
-    Matrix Transpose();
+    Matrix Transpose() const;
+    // Row and Col are 0 indexed
+    Matrix Submatrix(int row, int col) const;
 
     bool operator==(const Matrix &rhs) const;
     Matrix operator*(const Matrix &rhs) const;
