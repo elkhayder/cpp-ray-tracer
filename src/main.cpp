@@ -4,24 +4,22 @@
 #include "physics/environment.h"
 
 #include "graphics/canvas.h"
+#include "math/matrix.h"
 
 int main()
 {
-    Tuple start = Tuple::Point(0, 1, 0);
-    Tuple velocity = Tuple::Vector(1, 1.8, 0).Normalize() * 11.25;
-    Projectile projectile(start, velocity);
+    Canvas canvas(100, 100);
 
-    Tuple gravity = Tuple::Vector(0, -0.1, 0);
-    Tuple wind = Tuple::Vector(-0.01, 0, 0);
-    Environment environment(gravity, wind);
+    Tuple point = Tuple::Point(0, 0, 1);
 
-    Canvas canvas(900, 550);
-
-    do
+    for (int i = 0; i < 12; i++)
     {
-        canvas.WritePixel(projectile.Position().X(), projectile.Position().Y(), Color(1, 0, 0));
-        projectile = environment.Tick(projectile);
-    } while (projectile.Position().Y() > 0);
+        Tuple r = Matrix::Translation(50, 0, 50) * Matrix::Scaling(30, 0, 30) * Matrix::RotationY(i * 0.523598776) * point; // 0.523598776 ~ pi/6
+
+        std::cout << r << std::endl;
+
+        canvas.WritePixel(r.X(), r.Z(), Color(255, 255, 255));
+    }
 
     canvas.Save("output.ppm");
 
