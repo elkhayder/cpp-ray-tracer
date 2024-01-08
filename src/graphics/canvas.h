@@ -12,10 +12,10 @@ public:
         _buffer = new Color[_width * _height];
     }
 
-    ~Canvas()
-    {
-        delete[] _buffer;
-    }
+    // ~Canvas()
+    // {
+    //     delete[] _buffer;
+    // }
 
     int GetIndex(int x, int y) const;
 

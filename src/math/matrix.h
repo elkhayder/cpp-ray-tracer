@@ -12,16 +12,20 @@ public:
     Matrix(int rows, int cols);
     Matrix(int rows, int cols, float *data);
 
-/**
- * Apparently Gtest keeps track of the allocated memory and tries to free it afterwards
- * This deconstructor shouldn't be availbe in the GTEST executable to avoid double freeing the same memory
- */
-#ifndef GTEST
-    ~Matrix()
-    {
-        delete[] _buffer;
-    }
-#endif
+    /**
+     * Apparently Gtest keeps track of the allocated memory and tries to free it afterwards
+     * This deconstructor shouldn't be availbe in the GTEST executable to avoid double freeing the same memory
+     */
+    // #ifndef GTEST
+    //     ~Matrix()
+    //     {
+    //         if (_buffer != nullptr)
+    //         {
+    //             delete[] _buffer;
+    //             _buffer = nullptr;
+    //         }
+    //     }
+    // #endif
 
     static Matrix Zeros(int rows, int cols);
     static Matrix Zeros(int size) { return Zeros(size, size); }
@@ -67,7 +71,7 @@ public:
 
 private:
     int _rows, _cols;
-    float *_buffer;
+    float *_buffer = nullptr;
 };
 
 #endif // __MATRIX_H
