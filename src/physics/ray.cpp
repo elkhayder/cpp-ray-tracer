@@ -14,7 +14,7 @@ Ray Ray::Transform(Matrix matrix) const
         matrix * _direction);
 }
 
-std::tuple<int, Intersection, Intersection> Ray::Intersect(const Sphere &sphere)
+IntersectionGroup Ray::Intersect(const Sphere &sphere)
 {
     Ray objectSpaceRay = Transform(sphere.InverseTransformation());
 

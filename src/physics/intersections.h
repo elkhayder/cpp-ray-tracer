@@ -13,12 +13,15 @@ typedef struct
     float t;
 } Intersection;
 
+typedef std::tuple<int, Intersection, Intersection> IntersectionGroup;
+
 class Intersections
 {
 public:
     Intersections(const Sphere &sphere);
 
     void Join(const Intersection &other);
+    void Join(const IntersectionGroup &group);
 
     int Count() const;
 

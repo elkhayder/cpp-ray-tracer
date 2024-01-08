@@ -16,7 +16,7 @@ public:
 
     Ray Transform(Matrix matrix) const;
 
-    std::tuple<int, Intersection, Intersection> Intersect(const Sphere &sphere);
+    IntersectionGroup Intersect(const Sphere &sphere);
 
     const Tuple &Origin() const
     {
