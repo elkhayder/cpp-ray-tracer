@@ -19,5 +19,8 @@ if(BUILD_TESTING)
     )
             
     include(GoogleTest)
+    
+    add_definitions(-D GTEST)
+
     gtest_discover_tests(${CMAKE_PROJECT_NAME}_test)
 endif()
