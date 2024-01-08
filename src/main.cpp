@@ -1,24 +1,35 @@
 #include <iostream>
 
-#include "physics/projectile.h"
-#include "physics/environment.h"
+#include "physics/ray.h"
+#include "physics/objects/sphere.h"
 
 #include "graphics/canvas.h"
 #include "math/matrix.h"
 
 int main()
 {
-    Canvas canvas(100, 100);
+    Canvas canvas(500, 500);
 
-    Tuple point = Tuple::Point(0, 0, 1);
+    Sphere sphere;
+    sphere.SetTransformation(Matrix::Scaling(200, 200, 1));
 
-    for (int i = 0; i < 12; i++)
+    for (int x = -canvas.Width() / 2; x < canvas.Width() / 2; x++)
     {
-        Tuple r = Matrix::Translation(50, 0, 50) * Matrix::Scaling(30, 0, 30) * Matrix::RotationY(i * 0.523598776) * point; // 0.523598776 ~ pi/6
+        for (int y = -canvas.Height() / 2; y < canvas.Height() / 2; y++)
+        {
+            Ray ray(Tuple::Point(x, y, -10), Tuple::Vector(0, 0, 100));
 
-        std::cout << r << std::endl;
+            Intersections xs(sphere);
 
-        canvas.WritePixel(r.X(), r.Z(), Color(255, 255, 255));
+            xs.Join(ray.Intersect(sphere));
+
+            if (xs.Hit() != std::numeric_limits<float>::max())
+            {
+                canvas.WritePixel(x + canvas.Width() / 2,
+                                  y + canvas.Height() / 2,
+                                  Color(0xFF, 0, 0));
+            }
+        }
     }
 
     canvas.Save("output.ppm");
