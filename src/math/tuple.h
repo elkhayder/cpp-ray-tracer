@@ -83,7 +83,7 @@ public:
     friend Tuple operator+(const Tuple &a, const Tuple &b);
 
     // Substraction
-    Tuple operator-(const Tuple &other);
+    Tuple operator-(const Tuple &other) const;
 
     // Negation
     Tuple operator-() const;

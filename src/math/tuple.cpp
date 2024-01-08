@@ -45,7 +45,7 @@ Tuple Tuple::operator*(const Tuple &other) const
 }
 
 // Substraction
-Tuple Tuple::operator-(const Tuple &other)
+Tuple Tuple::operator-(const Tuple &other) const
 {
     /* Add all components */
     return Tuple(
