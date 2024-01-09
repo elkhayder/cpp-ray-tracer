@@ -20,3 +20,8 @@ bool Sphere::operator==(const Sphere &other)
 {
     return this == &other;
 }
+
+Tuple Sphere::NormalAt(const Tuple &point) const
+{
+    return (point - Tuple::Point(0, 0, 0)).Normalize();
+}

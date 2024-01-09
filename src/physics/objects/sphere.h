@@ -15,6 +15,8 @@ public:
     const Matrix &Transformation() const;
     const Matrix &InverseTransformation() const;
 
+    Tuple NormalAt(const Tuple &point) const;
+
     bool operator==(const Sphere &other);
 
 private:
