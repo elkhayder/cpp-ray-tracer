@@ -10,7 +10,7 @@ int Canvas::GetIndex(int x, int y) const
     return (_height - y) * _width + x;
 }
 
-void Canvas::WritePixel(int x, int y, Color color)
+void Canvas::WritePixel(int x, int y, const Color &color)
 {
     if (x >= _width || x < 0 || y >= _height || y < 0)
         return; // Ignore points outside the canvas
@@ -23,7 +23,7 @@ Color Canvas::GetPixel(int x, int y) const
     return _buffer[GetIndex(x, y)];
 }
 
-bool Canvas::Save(std::string filename) const
+bool Canvas::Save(const std::string &filename) const
 {
     std::ofstream outputFile;
 

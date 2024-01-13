@@ -19,12 +19,12 @@ public:
 
     int GetIndex(int x, int y) const;
 
-    void WritePixel(int x, int y, Color color);
+    void WritePixel(int x, int y, const Color &color);
 
     Color GetPixel(int x, int y) const;
 
     // TODO : provide multiple saving methods (move it oustside?)
-    bool Save(std::string filename) const;
+    bool Save(const std::string &filename) const;
 
     int Width() const
     {
