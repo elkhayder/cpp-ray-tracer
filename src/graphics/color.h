@@ -1,6 +1,8 @@
 #ifndef __COLOR_H
 #define __COLOR_H
 
+#include <ostream>
+
 class Color
 {
 public:
@@ -16,6 +18,7 @@ public:
     Color operator-(const Color &other) const;
 
     Color operator*(const Color &other) const;
+    Color operator*(const float &scalar) const;
 
     /**
      * Comparison
@@ -36,6 +39,15 @@ public:
     float B() const
     {
         return _b;
+    }
+
+    /**
+     * Output stream
+     */
+
+    friend std::ostream &operator<<(std::ostream &os, const Color &c)
+    {
+        return os << "Color(" << c._r << ", " << c._g << ", " << c._b << ")";
     }
 
 private:

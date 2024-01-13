@@ -7,12 +7,12 @@
 class Light
 {
 public:
-    Light(Color intensity, Tuple position) : _intensity(intensity),
-                                             _position(position) {}
+    Light(Tuple position, Color intensity) : position(position),
+                                             intensity(intensity) {}
 
-private:
-    Color _intensity;
-    Tuple _position;
+public:
+    Color intensity;
+    Tuple position;
 };
 
 #endif // __LIGHT_H

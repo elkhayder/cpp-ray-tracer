@@ -27,7 +27,7 @@ int main()
             {
                 canvas.WritePixel(x + canvas.Width() / 2,
                                   y + canvas.Height() / 2,
-                                  Color(0xFF, 0, 0));
+                                  Color(1, 0, 0));
             }
         }
     }

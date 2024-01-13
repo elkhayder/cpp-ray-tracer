@@ -3,12 +3,13 @@
 
 #include "../../math/tuple.h"
 #include "../../math/matrix.h"
+#include "../../graphics/material.h"
 
 class Sphere
 {
 public:
-    Sphere(Tuple origin) : _origin(origin) {}
-    Sphere() : Sphere(Tuple::Point(0, 0, 0)) {}
+    Sphere() {}
+    Sphere(Material material) : material(material) {}
 
     void SetTransformation(const Matrix &matrix);
 
@@ -19,8 +20,10 @@ public:
 
     bool operator==(const Sphere &other);
 
+public:
+    Material material;
+
 private:
-    Tuple _origin;
     Matrix _transformation = Matrix::Identity(), _inverseTransformation = Matrix::Identity();
 };
 
