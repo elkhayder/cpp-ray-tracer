@@ -31,6 +31,11 @@ float Tuple::Dot(const Tuple &other) const
     return _x * other._x + _y * other._y + _z * other._z + _w * other._w;
 }
 
+Tuple Tuple::Reflect(const Tuple &normal) const
+{
+    return *this - 2 * normal * this->Dot(normal);
+}
+
 /**
  * Operations
  */

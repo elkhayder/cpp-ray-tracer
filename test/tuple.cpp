@@ -94,3 +94,14 @@ TEST(TupleTest, CrossProduct)
 
     EXPECT_EQ(b * a, -c);
 }
+
+TEST(TupleTest, Reflect)
+{
+    EXPECT_EQ(
+        Tuple::Vector(1, -1, 0).Reflect(Tuple::Vector(0, 1, 0)),
+        Tuple::Vector(1, 1, 0));
+
+    EXPECT_EQ(
+        Tuple::Vector(0, -1, 0).Reflect(Tuple::Vector(std::sqrt(2) / 2, std::sqrt(2) / 2, 0)),
+        Tuple::Vector(1, 0, 0));
+}

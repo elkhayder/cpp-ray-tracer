@@ -25,6 +25,7 @@ public:
     float Magnitude() const;
     Tuple Normalize() const;
     float Dot(const Tuple &other) const;
+    Tuple Reflect(const Tuple &normal) const;
 
     float X() const
     {
