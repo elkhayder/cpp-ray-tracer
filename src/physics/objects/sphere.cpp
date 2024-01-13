@@ -21,7 +21,11 @@ bool Sphere::operator==(const Sphere &other)
     return this == &other;
 }
 
-Tuple Sphere::NormalAt(const Tuple &point) const
+Tuple Sphere::NormalAt(const Tuple &world_point) const
 {
-    return (point - Tuple::Point(0, 0, 0)).Normalize();
+    auto objectPoint = _inverseTransformation * world_point;
+    auto objectNormal = objectPoint - Tuple::Point(0, 0, 0);
+    auto worldNormal = _inverseTransformation.Transpose() * objectNormal;
+    worldNormal.SetW(0);
+    return worldNormal.Normalize();
 }
