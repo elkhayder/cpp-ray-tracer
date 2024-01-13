@@ -1,7 +1,7 @@
 #ifndef __CANVAS_H
 #define __CANVAS_H
 
-#include "color.h"
+#include "../graphics/color.h"
 #include <string>
 
 class Canvas

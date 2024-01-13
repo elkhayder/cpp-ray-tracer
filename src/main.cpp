@@ -3,7 +3,7 @@
 #include "physics/ray.h"
 #include "physics/objects/sphere.h"
 
-#include "graphics/canvas.h"
+#include "io/canvas.h"
 #include "math/matrix.h"
 
 int main()
