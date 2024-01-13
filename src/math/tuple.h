@@ -46,25 +46,25 @@ public:
         return _w;
     }
 
-    // float SetX(float x)
-    // {
-    //     _x = x;
-    // }
+    void SetX(float x)
+    {
+        _x = x;
+    }
 
-    // float SetY(float y)
-    // {
-    //     _y = y;
-    // }
+    void SetY(float y)
+    {
+        _y = y;
+    }
 
-    // float SetZ(float z)
-    // {
-    //     _z = z;
-    // }
+    void SetZ(float z)
+    {
+        _z = z;
+    }
 
-    // float SetW(float w)
-    // {
-    //     _w = w;
-    // }
+    void SetW(float w)
+    {
+        _w = w;
+    }
 
     /**
      * Comparison
