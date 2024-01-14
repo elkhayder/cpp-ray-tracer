@@ -7,11 +7,11 @@ Color Material::Lighting(const Light &light,
                          const Tuple &eye,
                          const Tuple &normal) const
 {
-    Color diffuse, specular, ambient;
+    Color diffuseResult, specularResult, ambientResult;
 
-    Color effectiveColor = _color * light.intensity;
+    Color effectiveColor = color * light.intensity;
     Tuple lightVector = (light.position - point).Normalize();
-    ambient = effectiveColor * _ambient;
+    ambientResult = effectiveColor * ambient;
 
     // light_dot_normal represents the cosine of the angle between the
     // light vector and the normal vector. A negative number means the
@@ -20,12 +20,12 @@ Color Material::Lighting(const Light &light,
 
     if (lightDotNormal < 0)
     {
-        diffuse = Color(0, 0, 0);  // Black
-        specular = Color(0, 0, 0); // Black
+        diffuseResult = Color(0, 0, 0);  // Black
+        specularResult = Color(0, 0, 0); // Black
     }
     else
     {
-        diffuse = effectiveColor * _diffuse * lightDotNormal;
+        diffuseResult = effectiveColor * diffuse * lightDotNormal;
 
         // reflect_dot_eye represents the cosine of the angle between the
         // reflection vector and the eye vector. A negative number means the
@@ -34,13 +34,13 @@ Color Material::Lighting(const Light &light,
         float reflectDotEye = reflectV.Dot(eye);
 
         if (reflectDotEye <= 0)
-            specular = Color(0, 0, 0); // Black
+            specularResult = Color(0, 0, 0); // Black
         else
         { // compute the specular contribution
-            float factor = std::pow(reflectDotEye, _shininess);
-            specular = light.intensity * _specular * factor;
+            float factor = std::pow(reflectDotEye, shininess);
+            specularResult = light.intensity * specular * factor;
         }
     }
 
-    return ambient + diffuse + specular;
+    return ambientResult + diffuseResult + specularResult;
 }
