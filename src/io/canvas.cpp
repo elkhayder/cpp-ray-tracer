@@ -26,6 +26,7 @@ Color Canvas::GetPixel(int x, int y) const
 bool Canvas::Save(const std::string &filename) const
 {
     std::ofstream outputFile;
+    std::string outputBuf;
 
     outputFile.open(filename, std::ios::out);
 
@@ -40,8 +41,15 @@ bool Canvas::Save(const std::string &filename) const
     {
         Color c = _buffer[i];
 
-        outputFile << (int)(MIN(c.R(), 1) * 255) << " " << (int)(MIN(c.G(), 1) * 255) << " " << (int)(MIN(c.B(), 1) * 255) << std::endl;
+        outputBuf += (int)(MIN(c.R(), 1) * 255);
+        outputBuf += " ";
+        outputBuf += (int)(MIN(c.G(), 1) * 255);
+        outputBuf += " ";
+        outputBuf += (int)(MIN(c.B(), 1) * 255);
+        outputBuf += "\n";
     }
+
+    outputFile << outputBuf;
 
     outputFile.close();
 
