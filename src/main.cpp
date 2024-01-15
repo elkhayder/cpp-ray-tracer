@@ -74,9 +74,9 @@ int main()
     {
         ImageChunk chunk = {
             .x = i * x_size - canvas.Width() / 2,
-            .x_size = (i == nThreads - 1) ? x_size + 1 : x_size,
+            .x_size = (i == nThreads - 1) ? x_size + x_rem : x_size,
             .y = i * y_size - canvas.Height() / 2,
-            .y_size = (i == nThreads - 1) ? y_size + 1 : y_size,
+            .y_size = (i == nThreads - 1) ? y_size + y_rem : y_size,
         };
 
         threads.push_back(std::thread(SimulateChunk, chunk, &canvas, sphere, RayDirection, eye, light));
